@@ -12,13 +12,15 @@ public enum SideType
 
 public class SideTrigger : MonoBehaviour
 {
-
     public string sideName;
     public Color sideColor = Color.white;
     public bool isTouchingGround = false;
-    
 
+    public PhysicsMaterial2D lowFriction;
+    public PhysicsMaterial2D highFriction;
     private BoxController box;
+    public SideType side;
+    public Collider2D bodyCollider;
 
     public SideType sideType;
 
@@ -26,6 +28,8 @@ public class SideTrigger : MonoBehaviour
     void Start()
     {
         box = GetComponentInParent<BoxController>();
+    
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -33,6 +37,15 @@ public class SideTrigger : MonoBehaviour
         if (other.CompareTag("Ground"))
         {
             isTouchingGround = true;
+            if (side == SideType.Feet)
+            {
+                bodyCollider.sharedMaterial = lowFriction;
+            }
+            else
+            {
+                bodyCollider.sharedMaterial = highFriction;
+            }
+            
         }
     }
 
@@ -41,12 +54,13 @@ public class SideTrigger : MonoBehaviour
         if (other.CompareTag("Ground"))
         {
             isTouchingGround = false;
+            bodyCollider.sharedMaterial = lowFriction;
             
         }
 
         else if (other.CompareTag("Wall)"))
         {
-        
+
         }
     }
 

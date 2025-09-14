@@ -216,6 +216,10 @@ MonoBehaviour:
   sideName: Tail
   sideColor: {r: 1, g: 0, b: 0, a: 1}
   isTouchingGround: 0
+  lowFriction: {fileID: 0}
+  highFriction: {fileID: 0}
+  side: 0
+  bodyCollider: {fileID: 0}
   sideType: 0
 --- !u!1 &255652892
 GameObject:
@@ -338,7 +342,7 @@ Rigidbody2D:
   m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 4
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 576b07a7803fb4e568203e2434fab674, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -526,6 +530,10 @@ MonoBehaviour:
   sideName: Feet
   sideColor: {r: 1, g: 0.9138411, b: 0.06132078, a: 1}
   isTouchingGround: 0
+  lowFriction: {fileID: 0}
+  highFriction: {fileID: 0}
+  side: 0
+  bodyCollider: {fileID: 255652896}
   sideType: 3
 --- !u!1 &519420028
 GameObject:
@@ -855,6 +863,10 @@ MonoBehaviour:
   sideName: Head
   sideColor: {r: 0, g: 0.32422137, b: 1, a: 1}
   isTouchingGround: 0
+  lowFriction: {fileID: 0}
+  highFriction: {fileID: 0}
+  side: 0
+  bodyCollider: {fileID: 0}
   sideType: 1
 --- !u!1 &1832935864
 GameObject:
@@ -1034,6 +1046,10 @@ MonoBehaviour:
   sideName: Nose
   sideColor: {r: 0, g: 1, b: 0.20958734, a: 1}
   isTouchingGround: 0
+  lowFriction: {fileID: 0}
+  highFriction: {fileID: 0}
+  side: 0
+  bodyCollider: {fileID: 0}
   sideType: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
