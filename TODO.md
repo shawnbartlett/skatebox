@@ -12,7 +12,7 @@
 
 ## 2nd Phase
 - Skatable Level Loop
-- Jump Mechanics
+- Jump Mechanics (One-Click hold to charge, button release jump)
 - Obstacle prefabs (box, rails)
 
 ## 3rd Phase
