@@ -6,37 +6,22 @@ using UnityEngine.UIElements;
 public class BoxController : MonoBehaviour
 {
 
-
-  public Color baseColor = Color.white;
-  public Color chargedColor = Color.yellow;
-  private SpriteRenderer sr;
-
   private Rigidbody2D rb;
-
-  public bool canJump; // sides
-  
-  private float dotProductBox;
 
   public SideTrigger bottomSide;
   public SideTrigger leftSide;
   public SideTrigger rightSide;
   public SideTrigger topSide;
 
-  public ParticleSystem chargeParticles;
-
-
-  
-
 
   void Start()
   {
     rb = GetComponent<Rigidbody2D>();
-    
+  
   }
 
   void Update()
   {
-  
     CheckGroundedSide();
   }
 
@@ -44,12 +29,6 @@ public class BoxController : MonoBehaviour
   void FixedUpdate()
   {
 
-  }
-
-  bool isGrounded()
-  {
-    return bottomSide.isTouchingGround || leftSide.isTouchingGround || rightSide.isTouchingGround
-      || topSide.isTouchingGround;
   }
 
   void CheckGroundedSide()
