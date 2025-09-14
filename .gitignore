@@ -1,0 +1,36 @@
+# --- Unity essentials ---
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+sysinfo.txt
+
+# IDEs
+.vscode/
+.vs/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Crash/Profiler
+*.pidb
+*.mdb
+*.pdb
+
+# Unity cache
+/[Aa]ssets/Plugins/Editor/JetBrains*.*
+
+# Optional: keep Addressables cache out
+/[Aa]ssetBundles/
