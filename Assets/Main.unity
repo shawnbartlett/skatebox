@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 238368232}
   - component: {fileID: 238368233}
   m_Layer: 11
-  m_Name: Left
+  m_Name: Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a5fff5e1fbd43d3b136293eba466b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sideName: Left
+  sideName: Tail
   sideColor: {r: 1, g: 0, b: 0, a: 1}
   isTouchingGround: 0
   sideType: 0
@@ -559,7 +559,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 0}
+  m_BackGroundColor: {r: 0.6084906, g: 0.85016316, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -639,7 +639,7 @@ GameObject:
   - component: {fileID: 711923563}
   - component: {fileID: 711923562}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -732,7 +732,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6698113, g: 0.65782374, b: 0.6540139, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -948,7 +948,7 @@ GameObject:
   - component: {fileID: 1897222284}
   - component: {fileID: 1897222285}
   m_Layer: 11
-  m_Name: Right
+  m_Name: Nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1026,7 +1026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a5fff5e1fbd43d3b136293eba466b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sideName: Right
+  sideName: Nose
   sideColor: {r: 0, g: 1, b: 0.20958734, a: 1}
   isTouchingGround: 0
   sideType: 2

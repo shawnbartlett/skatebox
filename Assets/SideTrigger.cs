@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum SideType
     {
-        Red,
-        Blue,
-        Green,
-        Yellow
+        Tail,
+        Head,
+        Nose,
+        Feet
     }
 
 public class SideTrigger : MonoBehaviour
