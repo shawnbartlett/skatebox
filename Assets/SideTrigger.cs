@@ -42,10 +42,7 @@ public class SideTrigger : MonoBehaviour
             box.canJump = true;
 
         }
-        else if (other.CompareTag("Wall)"))
-        {
-            isSliding = true;
-        }
+       
     }
 
     void OnTriggerExit2D(Collider2D other)
