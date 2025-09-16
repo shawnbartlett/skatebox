@@ -165,7 +165,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 238368228}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d35ea119f00ef4a83ab2aa31c746c1f4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -273,9 +273,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 3
-  pushImpulse: 6
-  maxSpeed: 10
-  clickCooldown: 0.18
+  pushForce: 6
+  maxSpeed: 20
   feetTrigger: {fileID: 501756157}
   bottomSide: {fileID: 501756157}
   leftSide: {fileID: 1897222285}
@@ -342,7 +341,7 @@ Rigidbody2D:
   m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 4
-  m_Material: {fileID: 6200000, guid: 576b07a7803fb4e568203e2434fab674, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -479,7 +478,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 501756152}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 576b07a7803fb4e568203e2434fab674, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -530,7 +529,7 @@ MonoBehaviour:
   sideName: Feet
   sideColor: {r: 1, g: 0.9138411, b: 0.06132078, a: 1}
   isTouchingGround: 0
-  lowFriction: {fileID: 0}
+  lowFriction: {fileID: 6200000, guid: 576b07a7803fb4e568203e2434fab674, type: 2}
   highFriction: {fileID: 0}
   side: 0
   bodyCollider: {fileID: 255652896}
@@ -546,7 +545,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -628,18 +626,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61ab3f2e623c14655b7ce3629e60ff31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &711923561
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,7 +798,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1332572196}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d35ea119f00ef4a83ab2aa31c746c1f4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -995,7 +981,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1897222280}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d35ea119f00ef4a83ab2aa31c746c1f4, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
