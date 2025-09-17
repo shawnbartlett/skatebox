@@ -3,6 +3,7 @@
 ## 1st Phase
 [x] Character Sprite (Skater)
 [x] Grounded Push Kick (REWORKED)
+[x] Push Kick Cooldown
 [x] Friction for Feet and Sides (REWORKED)
 - Auto Scroll Camera 
 - Simple Ground Tiles

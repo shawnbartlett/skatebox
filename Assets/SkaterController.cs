@@ -16,11 +16,11 @@ public class BoxController : MonoBehaviour
   public SideTrigger nose;
   public SideTrigger tail;
 
-
-
   private Rigidbody2D rb;
 
-  private bool canPush = false; 
+  private bool canPush = false;
+  private float lastPushTime = 0f;
+  private float pushCooldown = 0.5f;
 
   void Start()
   {
@@ -31,7 +31,7 @@ public class BoxController : MonoBehaviour
   {
     CheckPushInput();
     CheckTouchingSides();
-    
+
   }
 
   // Update is called once per frame
@@ -48,8 +48,24 @@ public class BoxController : MonoBehaviour
     if (Input.GetMouseButtonDown(0))
     {
       Debug.Log("Mouse Clicked!");
-      canPush = true;
+      TryPushCooldown();
     }
+  }
+
+  void TryPushCooldown()
+  {
+    if (Time.time - lastPushTime >= pushCooldown)
+    {
+      canPush = true;
+      lastPushTime = Time.time;
+    }
+  }
+
+  void ApplyPushForce()
+  {
+    //Debug.Log("Push!");
+    rb.AddForce(Vector2.right * pushForce, ForceMode2D.Impulse);
+    canPush = false;
   }
 
   void CheckTouchingSides()
@@ -73,13 +89,6 @@ public class BoxController : MonoBehaviour
     {
       Debug.Log("Tail");
     }
-  }
-
-  void ApplyPushForce()
-  {
-    Debug.Log("Push!");
-    rb.AddForce(Vector2.right * pushForce, ForceMode2D.Impulse);
-    canPush = false;
   }
 
 }
