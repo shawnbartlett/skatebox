@@ -5,7 +5,7 @@
 [x] Grounded Push Kick (REWORKED)
 [x] Push Kick Cooldown
 [x] Friction for Feet and Sides (REWORKED)
-- Auto Scroll Camera 
+[x] Auto Scroll Camera 
 - Simple Ground Tiles
 - Background
 - Death box + restart mechanic
