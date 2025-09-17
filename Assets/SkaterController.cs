@@ -11,16 +11,14 @@ public class BoxController : MonoBehaviour
   public float maxSpeed = 10f;  // hard speed cap
 
 
-  public SideTrigger feetTrigger;
+  public SideTrigger feet;
+  public SideTrigger head;
+  public SideTrigger nose;
+  public SideTrigger tail;
 
 
 
   private Rigidbody2D rb;
-
-  public SideTrigger bottomSide;
-  public SideTrigger leftSide;
-  public SideTrigger rightSide;
-  public SideTrigger topSide;
 
   private bool canPush = false; 
 
@@ -32,7 +30,8 @@ public class BoxController : MonoBehaviour
   void Update()
   {
     CheckPushInput();
-    CheckGroundedSide();
+    CheckTouchingSides();
+    
   }
 
   // Update is called once per frame
@@ -53,6 +52,29 @@ public class BoxController : MonoBehaviour
     }
   }
 
+  void CheckTouchingSides()
+  {
+    if (feet.isTouchingGround)
+    {
+      Debug.Log("Feet");
+    }
+
+    if (head.isTouchingGround)
+    {
+      Debug.Log("Head");
+    }
+
+    if (nose.isTouchingGround)
+    {
+      Debug.Log("Nose");
+    }
+
+    if (tail.isTouchingGround)
+    {
+      Debug.Log("Tail");
+    }
+  }
+
   void ApplyPushForce()
   {
     Debug.Log("Push!");
@@ -60,26 +82,6 @@ public class BoxController : MonoBehaviour
     canPush = false;
   }
 
-
-  void CheckGroundedSide()
-  {
-    if (bottomSide.isTouchingGround)
-    {
-      //Debug.Log(bottomSide.sideType);
-    }
-    if (leftSide.isTouchingGround)
-    {
-      //Debug.Log(leftSide.sideType);
-    }
-    if (rightSide.isTouchingGround)
-    {
-      //Debug.Log(rightSide.sideType);
-    }
-    if (topSide.isTouchingGround)
-    {
-      //Debug.Log(topSide.sideType);
-    }
-  }
 }
 
 

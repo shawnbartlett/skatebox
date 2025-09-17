@@ -2,8 +2,8 @@
 
 ## 1st Phase
 [x] Character Sprite (Skater)
-[x] Grounded Push Kick
-[x] Friction for Feet and Sides
+[x] Grounded Push Kick (REWORKED)
+[x] Friction for Feet and Sides (REWORKED)
 - Auto Scroll Camera 
 - Simple Ground Tiles
 - Background
@@ -19,3 +19,5 @@
 - Mouse Cursor Visible
 - Mouse rotation controls character spin
 - Trick scoring system
+- Manual nose/tail grind/slide
+

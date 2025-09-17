@@ -150,8 +150,8 @@ Transform:
   m_GameObject: {fileID: 238368228}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.454, y: -0.008, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.8, z: 1}
+  m_LocalPosition: {x: -0.321, y: -0.434, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 255652894}
@@ -199,8 +199,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0.06
+  m_Size: {x: 0.1, y: 0.08}
+  m_EdgeRadius: 0
 --- !u!114 &238368233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,14 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a5fff5e1fbd43d3b136293eba466b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sideName: Tail
-  sideColor: {r: 1, g: 0, b: 0, a: 1}
   isTouchingGround: 0
-  lowFriction: {fileID: 0}
-  highFriction: {fileID: 0}
-  side: 0
-  bodyCollider: {fileID: 0}
-  sideType: 0
 --- !u!1 &255652892
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,9 +225,8 @@ GameObject:
   - component: {fileID: 255652894}
   - component: {fileID: 255652895}
   - component: {fileID: 255652897}
-  - component: {fileID: 255652896}
   m_Layer: 11
-  m_Name: PlayerBox
+  m_Name: Skater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,58 +265,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 3
-  pushForce: 6
+  pushForce: 4
   maxSpeed: 20
-  feetTrigger: {fileID: 501756157}
-  bottomSide: {fileID: 501756157}
-  leftSide: {fileID: 1897222285}
-  rightSide: {fileID: 238368233}
-  topSide: {fileID: 1332572201}
---- !u!61 &255652896
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255652892}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  feet: {fileID: 501756157}
+  head: {fileID: 1332572201}
+  nose: {fileID: 1897222285}
+  tail: {fileID: 238368233}
 --- !u!50 &255652897
 Rigidbody2D:
   serializedVersion: 4
@@ -463,8 +409,8 @@ Transform:
   m_GameObject: {fileID: 501756152}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.008, y: -0.454, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.1, z: 1}
+  m_LocalPosition: {x: -0.003, y: -0.457, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 255652894}
@@ -498,7 +444,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0, y: 0}
@@ -512,8 +458,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0.06
+  m_Size: {x: 0.65, y: 0.14}
+  m_EdgeRadius: 0
 --- !u!114 &501756157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,14 +472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a5fff5e1fbd43d3b136293eba466b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sideName: Feet
-  sideColor: {r: 1, g: 0.9138411, b: 0.06132078, a: 1}
   isTouchingGround: 0
-  lowFriction: {fileID: 6200000, guid: 576b07a7803fb4e568203e2434fab674, type: 2}
-  highFriction: {fileID: 0}
-  side: 0
-  bodyCollider: {fileID: 255652896}
-  sideType: 3
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,8 +722,8 @@ Transform:
   m_GameObject: {fileID: 1332572196}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.458, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.1, z: 1}
+  m_LocalPosition: {x: -0.002, y: 0.352, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 255652894}
@@ -832,8 +771,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0.06
+  m_Size: {x: 0.27, y: 0.27}
+  m_EdgeRadius: 0
 --- !u!114 &1332572201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,14 +785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a5fff5e1fbd43d3b136293eba466b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sideName: Head
-  sideColor: {r: 0, g: 0.32422137, b: 1, a: 1}
   isTouchingGround: 0
-  lowFriction: {fileID: 0}
-  highFriction: {fileID: 0}
-  side: 0
-  bodyCollider: {fileID: 0}
-  sideType: 1
 --- !u!1 &1832935864
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,8 +898,8 @@ Transform:
   m_GameObject: {fileID: 1897222280}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.454, y: -0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.8, z: 1}
+  m_LocalPosition: {x: 0.323, y: -0.436, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 255652894}
@@ -1015,8 +947,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0.06
+  m_Size: {x: 0.1, y: 0.08}
+  m_EdgeRadius: 0
 --- !u!114 &1897222285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,14 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a5fff5e1fbd43d3b136293eba466b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sideName: Nose
-  sideColor: {r: 0, g: 1, b: 0.20958734, a: 1}
   isTouchingGround: 0
-  lowFriction: {fileID: 0}
-  highFriction: {fileID: 0}
-  side: 0
-  bodyCollider: {fileID: 0}
-  sideType: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
