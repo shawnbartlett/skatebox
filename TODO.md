@@ -6,7 +6,8 @@
 [x] Push Kick Cooldown
 [x] Friction for Feet and Sides (REWORKED)
 [x] Auto Scroll Camera 
-- Simple Ground Tiles
+[x] Simple Ground Tiles
+- Tile Map (Collider and player movement test)
 - Background
 - Death box + restart mechanic
 - Basic UI
