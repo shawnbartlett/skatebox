@@ -7,19 +7,20 @@
 [x] Friction for Feet and Sides (REWORKED)
 [x] Auto Scroll Camera 
 [x] Simple Ground Tiles
-- Tile Map (Collider and player movement test)
-- Background
+[x] Tile Map (Collider and player movement test)
+- Jump Mechanics (One-Click hold to charge, button release jump)
 - Death box + restart mechanic
-- Basic UI
 
 ## 2nd Phase
 - Skatable Level Loop
-- Jump Mechanics (One-Click hold to charge, button release jump)
-- Obstacle prefabs (box, rails)
+- Basic UI
+- Core loop established
+- Background
 
 ## 3rd Phase
 - Mouse Cursor Visible
 - Mouse rotation controls character spin
 - Trick scoring system
+- Obstacle prefabs (box, rails)
 - Manual nose/tail grind/slide
 
