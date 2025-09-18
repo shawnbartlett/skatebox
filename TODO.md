@@ -8,6 +8,7 @@
 [x] Auto Scroll Camera 
 [x] Simple Ground Tiles
 [x] Tile Map (Collider and player movement test)
+[X] Basic Ramp Sprite + 2D Polygon/Edge Collider
 - Jump Mechanics (One-Click hold to charge, button release jump)
 - Death box + restart mechanic
 
