@@ -1,26 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class BoxController : MonoBehaviour
+public class SkaterController : MonoBehaviour
 {
 
-  public float baseSpeed = 3f;  //starting roll speed
-  public float pushForce = 6f;  //strength per click
-  public float maxSpeed = 10f;  // hard speed cap
+  
+  public float pushForce = 1.4f;  //strength per click
+  public float maxSpeed = 3f;  // hard speed cap
+  
+  
 
-
-  public SideTrigger feet;
-  public SideTrigger head;
-  public SideTrigger nose;
-  public SideTrigger tail;
+  public GroundTrigger groundCheck;
 
   private Rigidbody2D rb;
 
-  private bool canPush = false;
+  private bool wantsToPush = false;
   private float lastPushTime = 0f;
-  private float pushCooldown = 0.5f;
+  public float pushCooldown = 0.1f;
 
   void Start()
   {
@@ -31,16 +31,19 @@ public class BoxController : MonoBehaviour
   {
     CheckPushInput();
     CheckTouchingSides();
+    
 
   }
 
   // Update is called once per frame
   void FixedUpdate()
   {
-    if (canPush)
+    if (wantsToPush && groundCheck.isGrounded && Mathf.Abs(rb.velocity.x) <= maxSpeed)
     {
       ApplyPushForce();
     }
+
+    wantsToPush = false;
   }
 
   void CheckPushInput()
@@ -56,39 +59,23 @@ public class BoxController : MonoBehaviour
   {
     if (Time.time - lastPushTime >= pushCooldown)
     {
-      canPush = true;
+      wantsToPush = true;
       lastPushTime = Time.time;
     }
   }
 
   void ApplyPushForce()
   {
-    //Debug.Log("Push!");
-    rb.AddForce(Vector2.right * pushForce, ForceMode2D.Impulse);
-    canPush = false;
+    float currentSpeed = Mathf.Abs(rb.velocity.x);
+    float ratio = Mathf.Clamp01(1f - (currentSpeed / maxSpeed));
+    float effectiveForce = pushForce * ratio;
+
+    rb.AddForce(Vector2.right * effectiveForce, ForceMode2D.Impulse);
   }
 
   void CheckTouchingSides()
   {
-    if (feet.isTouchingGround)
-    {
-      Debug.Log("Feet");
-    }
 
-    if (head.isTouchingGround)
-    {
-      Debug.Log("Head");
-    }
-
-    if (nose.isTouchingGround)
-    {
-      Debug.Log("Nose");
-    }
-
-    if (tail.isTouchingGround)
-    {
-      Debug.Log("Tail");
-    }
   }
 
 }
