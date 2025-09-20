@@ -6,16 +6,18 @@ public class SideTrigger : MonoBehaviour
 {
     public bool isTouchingGround = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    
+   private GameManager gm;
 
-    }
+   // Start is called before the first frame update
+   void Start()
+   {
+      gm = FindAnyObjectByType<GameManager>();
+   }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-       isTouchingGround = true;
+      gm.ResetPlayer();
+      isTouchingGround = true;
     }
 
     void OnTriggerExit2D(Collider2D other)
