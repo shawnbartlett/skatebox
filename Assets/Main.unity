@@ -219,7 +219,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0.02
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.7
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -243,12 +243,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7775ad55a33e94882ad7dece132bbefb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpForce: 5
   pushForce: 1.4
   maxSpeed: 7
   groundCheck: {fileID: 969725164}
   spriteRenderer: {fileID: 1832935866}
   rideSprite: {fileID: 21300000, guid: 139ce5dd6099c47bda208d4e86db5de6, type: 3}
   pushSprite: {fileID: 21300000, guid: 51f7f03422cef4b22a81b6a36519c032, type: 3}
+  crouchSprite: {fileID: 0}
+  jumpSprite: {fileID: 0}
   pushCooldown: 0.1
 --- !u!1 &501756152
 GameObject:

@@ -9,11 +9,9 @@ using UnityEngine.UIElements;
 public class SkaterController : MonoBehaviour
 {
 
-
+  public float jumpForce = 5f;
   public float pushForce = 1.4f;  //strength per click
   public float maxSpeed = 7f;  // hard speed cap
-
-
 
   public GroundTrigger groundCheck;
 
@@ -21,6 +19,8 @@ public class SkaterController : MonoBehaviour
   public SpriteRenderer spriteRenderer;
   public Sprite rideSprite;
   public Sprite pushSprite;
+  public Sprite crouchSprite;
+  public Sprite jumpSprite;
 
   private bool wantsToPush = false;
   private float lastPushTime = 0f;
@@ -47,6 +47,7 @@ public class SkaterController : MonoBehaviour
     }
 
     wantsToPush = false;
+
   }
 
   void CheckPushInput()
