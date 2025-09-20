@@ -2,21 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class SkaterController : MonoBehaviour
 {
 
-  
+
   public float pushForce = 1.4f;  //strength per click
-  public float maxSpeed = 3f;  // hard speed cap
-  
-  
+  public float maxSpeed = 7f;  // hard speed cap
+
+
 
   public GroundTrigger groundCheck;
 
   private Rigidbody2D rb;
+  public SpriteRenderer spriteRenderer;
+  public Sprite rideSprite;
+  public Sprite pushSprite;
 
   private bool wantsToPush = false;
   private float lastPushTime = 0f;
@@ -25,14 +29,13 @@ public class SkaterController : MonoBehaviour
   void Start()
   {
     rb = GetComponent<Rigidbody2D>();
+  
   }
 
   void Update()
   {
     CheckPushInput();
-    CheckTouchingSides();
-    
-
+    UpdateSpriteState();
   }
 
   // Update is called once per frame
@@ -73,9 +76,19 @@ public class SkaterController : MonoBehaviour
     rb.AddForce(Vector2.right * effectiveForce, ForceMode2D.Impulse);
   }
 
-  void CheckTouchingSides()
+  void UpdateSpriteState()
   {
-
+    if (Time.time < lastPushTime + pushCooldown)
+    {
+      spriteRenderer.sprite = pushSprite;
+      return;
+    }
+    if (Mathf.Abs(rb.velocity.x) < 0.1f)
+    {
+      spriteRenderer.sprite = pushSprite;
+      return;
+    }
+    spriteRenderer.sprite = rideSprite;
   }
 
 }
