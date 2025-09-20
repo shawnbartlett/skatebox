@@ -9,14 +9,14 @@
 [x] Simple Ground Tiles
 [x] Tile Map (Collider and player movement test)
 [X] Basic Ramp Sprite + 2D Polygon/Edge Collider
+[x] Death box + restart mechanic
 - Jump Mechanics (One-Click hold to charge, button release jump)
-- Death box + restart mechanic
 
 ## 2nd Phase
 - Skatable Level Loop
 - Basic UI
 - Core loop established
-- Background
+- Simple Parallax Background
 
 ## 3rd Phase
 - Mouse Cursor Visible
@@ -24,4 +24,8 @@
 - Trick scoring system
 - Obstacle prefabs (box, rails)
 - Manual nose/tail grind/slide
+- Simple Background scenery
+- Simple foreground scenery
+
+
 
