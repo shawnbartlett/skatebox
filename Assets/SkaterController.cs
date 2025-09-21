@@ -9,10 +9,6 @@ using UnityEngine.UIElements;
 public class SkaterController : MonoBehaviour
 {
 
-  public float jumpForce = 5f;
-  public float pushForce = 1.4f;  //strength per click
-  public float maxSpeed = 7f;  // hard speed cap
-
   public GroundTrigger groundCheck;
 
   private Rigidbody2D rb;
@@ -21,11 +17,20 @@ public class SkaterController : MonoBehaviour
   public Sprite pushSprite;
   public Sprite crouchSprite;
   public Sprite jumpSprite;
+  public Sprite crouchRight;
+  public Sprite crouchLeft;
 
-  //private bool canJump = false;
   public float jumpTimeThreshold = 0.2f;
   private float jumpTime;
+  public float jumpForce = 5f;
+  public float pushForce = 1.4f;  //strength per click
+  public float maxSpeed = 7f;  // hard speed cap
+  public float spinForce = 1f;  //spin power
 
+  public float numberOfFlips = 1; // n number of spin rotations
+  private bool spinLeft = false;
+  private bool spinRight = false;
+  private bool canJump = false;
   private bool canPush = false;
   private float lastPushTime = 0f;
   public float pushCooldown = 0.1f;
@@ -33,12 +38,15 @@ public class SkaterController : MonoBehaviour
   void Start()
   {
     rb = GetComponent<Rigidbody2D>();
+    rb.centerOfMass = Vector2.zero;     // reset com to middle of skater
+    UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+    UnityEngine.Cursor.visible = false;
 
   }
 
   void Update()
   {
-    CheckPushInput();
+    CheckInput();
     UpdateSpriteState();
   }
 
@@ -48,81 +56,128 @@ public class SkaterController : MonoBehaviour
     if (canPush && groundCheck.isGrounded && Mathf.Abs(rb.velocity.x) <= maxSpeed)
     {
       ApplyPushForce();
+      canPush = false;
     }
-
-    canPush = false;
-
+    if (canJump)
+    {
+      ApplyJumpForce();
+      canJump = false;
+    }
   }
 
-  void CheckPushInput()
+  void CheckInput()
+    {
+      if (!groundCheck.isGrounded) return;    //exit if no ground touchy
+
+      if (Input.GetMouseButtonDown(0))
+      {
+        jumpTime = 0f;
+      }
+
+      if (Input.GetMouseButton(0))
+      {
+        jumpTime += Time.deltaTime;
+
+        if (jumpTime > jumpTimeThreshold)
+        {
+          SetSpinDirection();
+        }
+      }
+
+      if (Input.GetMouseButtonUp(0))
+      {
+        if (jumpTime <= jumpTimeThreshold)
+        {
+          //Debug.Log("TRY PUSH!");
+          TryPushCooldown();
+          StartCoroutine(SpriteSwitchPush());
+        }
+        else
+        {
+          //Debug.Log("TRY JUMP!");
+          canJump = true;
+          StartCoroutine(SpriteSwitchJump());
+        }
+
+        jumpTime = 0f;
+      }
+    }
+
+  void SetSpinDirection()
   {
-    if (!groundCheck.isGrounded) return;    //exit if no ground touchy
+    float mouseDirection = Input.GetAxis("Mouse X");
 
-    if (Input.GetMouseButtonDown(0))
+    if (mouseDirection < -0.05f && !spinLeft)
     {
-      jumpTime = 0f;
+      spinLeft = true;
+      spinRight = false;
+      spriteRenderer.sprite = crouchLeft;
+      StartCoroutine(ResetSpin());
+    }
+    else if (mouseDirection > 0.05f && !spinRight)
+    {
+      spinRight = true;
+      spinLeft = false;
+      spriteRenderer.sprite = crouchRight;
+      StartCoroutine(ResetSpin());
     }
 
-    if (Input.GetMouseButton(0))
+    else if (!spinLeft && !spinRight)
     {
-      jumpTime += Time.deltaTime;
-
-      if (jumpTime > jumpTimeThreshold)
-      {
-        spriteRenderer.sprite = crouchSprite;
-      }
+      spriteRenderer.sprite = crouchSprite;
     }
-
-    if (Input.GetMouseButtonUp(0))
-    {
-      if (jumpTime <= jumpTimeThreshold)
-      {
-        Debug.Log("TRY PUSH!");
-        TryPushCooldown();
-        StartCoroutine(SpriteSwitchPush());
-      }
-      else
-      {
-        Debug.Log("TRY JUMP!");
-        ApplyJumpForce();
-        StartCoroutine(SpriteSwitchJump());
-      }
-
-      jumpTime = 0f;
-    }
+   
   }
 
   void TryPushCooldown()
-  {
-    if (Time.time - lastPushTime >= pushCooldown)
     {
-      canPush = true;
-      lastPushTime = Time.time;
+      if (Time.time - lastPushTime >= pushCooldown)
+      {
+        canPush = true;
+        lastPushTime = Time.time;
+      }
     }
-  }
 
   void ApplyJumpForce()
-  {
-    rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-  }
+    {
+      rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+      float torque = 0f;
+      if (spinLeft)
+      {
+        torque = spinForce;
+      }
+      else if (spinRight)
+      {
+        torque = -spinForce;
+      }
+
+      rb.AddTorque(spinForce * torque, ForceMode2D.Impulse);
+
+      spinLeft = false;
+      spinRight = false;
+    }
 
   void ApplyPushForce()
-  {
-    float currentSpeed = Mathf.Abs(rb.velocity.x);
-    float ratio = Mathf.Clamp01(1f - (currentSpeed / maxSpeed));
-    float effectiveForce = pushForce * ratio;
+    {
+      float currentSpeed = Mathf.Abs(rb.velocity.x);
+      float ratio = Mathf.Clamp01(1f - (currentSpeed / maxSpeed));
+      float effectiveForce = pushForce * ratio;
 
-    rb.AddForce(Vector2.right * effectiveForce, ForceMode2D.Impulse);
-  }
+      rb.AddForce(Vector2.right * effectiveForce, ForceMode2D.Impulse);
+    }
 
   void UpdateSpriteState()
   {
+    /*
     if (groundCheck.isGrounded && Mathf.Abs(rb.velocity.x) < 0.1f)
     {
       spriteRenderer.sprite = pushSprite;
       return;
     }
+    */
   }
+  
 
   private IEnumerator SpriteSwitchPush()
   {
@@ -148,6 +203,13 @@ public class SkaterController : MonoBehaviour
     spriteRenderer.sprite = rideSprite;
   }
 
+  IEnumerator ResetSpin()
+  {
+    yield return new WaitForSeconds(0.4f);
+    spinLeft = false;
+    spinRight = false;
+  
+  }
 }
 
 

@@ -13,8 +13,10 @@
 [x] Jump Mechanics (One-Click hold to charge, button release jump)
 
 ## 2nd Phase
-- Mouse Cursor Visible
-- Mouse rotation controls character spin
+[x] Mouse Cursor Visible / Cursor Lock
+[x] Mouse rotation controls character spin during jump charge
+[x] Update Sprite art for event states
+- FIXME: Bug in crouch and crouch left/right flicker
 - Skatable Level Loop
 - Basic UI
 - Trick scoring system

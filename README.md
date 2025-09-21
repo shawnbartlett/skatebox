@@ -11,7 +11,10 @@ Physics driven pixel protoype.
 ![Ramp](Devlogs/ramp.gif)
 
 ## Jump
-![Ramp](Devlogs/jump.gif)
+![Jump](Devlogs/jump.gif)
+
+## Flip
+![Flip](Devlogs/flip.gif)
 
 ## TODO (Sample)
 [x] Push kick
