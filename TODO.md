@@ -26,6 +26,7 @@
 - Manual nose/tail grind/slide
 - Simple Background scenery
 - Simple foreground scenery
+- Procedural single Level / difficulty scales with time 
 
 
 

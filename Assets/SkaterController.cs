@@ -22,14 +22,18 @@ public class SkaterController : MonoBehaviour
   public Sprite crouchSprite;
   public Sprite jumpSprite;
 
-  private bool wantsToPush = false;
+  //private bool canJump = false;
+  public float jumpTimeThreshold = 0.2f;
+  private float jumpTime;
+
+  private bool canPush = false;
   private float lastPushTime = 0f;
   public float pushCooldown = 0.1f;
 
   void Start()
   {
     rb = GetComponent<Rigidbody2D>();
-  
+
   }
 
   void Update()
@@ -41,21 +45,50 @@ public class SkaterController : MonoBehaviour
   // Update is called once per frame
   void FixedUpdate()
   {
-    if (wantsToPush && groundCheck.isGrounded && Mathf.Abs(rb.velocity.x) <= maxSpeed)
+    if (canPush && groundCheck.isGrounded && Mathf.Abs(rb.velocity.x) <= maxSpeed)
     {
       ApplyPushForce();
     }
 
-    wantsToPush = false;
+    canPush = false;
 
   }
 
   void CheckPushInput()
   {
+    if (!groundCheck.isGrounded) return;    //exit if no ground touchy
+
     if (Input.GetMouseButtonDown(0))
     {
-      Debug.Log("Mouse Clicked!");
-      TryPushCooldown();
+      jumpTime = 0f;
+    }
+
+    if (Input.GetMouseButton(0))
+    {
+      jumpTime += Time.deltaTime;
+
+      if (jumpTime > jumpTimeThreshold)
+      {
+        spriteRenderer.sprite = crouchSprite;
+      }
+    }
+
+    if (Input.GetMouseButtonUp(0))
+    {
+      if (jumpTime <= jumpTimeThreshold)
+      {
+        Debug.Log("TRY PUSH!");
+        TryPushCooldown();
+        StartCoroutine(SpriteSwitchPush());
+      }
+      else
+      {
+        Debug.Log("TRY JUMP!");
+        ApplyJumpForce();
+        StartCoroutine(SpriteSwitchJump());
+      }
+
+      jumpTime = 0f;
     }
   }
 
@@ -63,9 +96,14 @@ public class SkaterController : MonoBehaviour
   {
     if (Time.time - lastPushTime >= pushCooldown)
     {
-      wantsToPush = true;
+      canPush = true;
       lastPushTime = Time.time;
     }
+  }
+
+  void ApplyJumpForce()
+  {
+    rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
   }
 
   void ApplyPushForce()
@@ -79,16 +117,34 @@ public class SkaterController : MonoBehaviour
 
   void UpdateSpriteState()
   {
-    if (Time.time < lastPushTime + pushCooldown)
+    if (groundCheck.isGrounded && Mathf.Abs(rb.velocity.x) < 0.1f)
     {
       spriteRenderer.sprite = pushSprite;
       return;
     }
-    if (Mathf.Abs(rb.velocity.x) < 0.1f)
+  }
+
+  private IEnumerator SpriteSwitchPush()
+  {
+    spriteRenderer.sprite = pushSprite;
+    yield return new WaitForSeconds(0.1f);  //can adjust 
+    if (groundCheck.isGrounded)
     {
-      spriteRenderer.sprite = pushSprite;
-      return;
+      spriteRenderer.sprite = rideSprite;
     }
+  }
+
+  private IEnumerator SpriteSwitchJump()
+  {
+    spriteRenderer.sprite = jumpSprite;
+
+    yield return new WaitUntil(() => rb.velocity.y <= 0f);
+    spriteRenderer.sprite = rideSprite;
+
+    yield return new WaitUntil(() => groundCheck.isGrounded);
+    spriteRenderer.sprite = crouchSprite;
+
+    yield return new WaitForSeconds(0.1f); //can adjust
     spriteRenderer.sprite = rideSprite;
   }
 

@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
 
     public Transform player;    //skater
+    public Quaternion startRotation;
     public Vector3 startPosition;
     public float deathY = -1.0f;      // fall below reset point
 
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         startPosition = player.position;
+        startRotation = player.rotation;
+        
     }
 
     // Update is called once per frame
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
     public void ResetPlayer()
     {
         player.position = startPosition;
+        player.rotation = startRotation;
 
         var rb = player.GetComponent<Rigidbody2D>();
         if (rb != null)

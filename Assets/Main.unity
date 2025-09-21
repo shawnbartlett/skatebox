@@ -250,8 +250,9 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1832935866}
   rideSprite: {fileID: 21300000, guid: 139ce5dd6099c47bda208d4e86db5de6, type: 3}
   pushSprite: {fileID: 21300000, guid: 51f7f03422cef4b22a81b6a36519c032, type: 3}
-  crouchSprite: {fileID: 0}
-  jumpSprite: {fileID: 0}
+  crouchSprite: {fileID: 21300000, guid: 7bef7ce40016746e9b4a5d67a1ca3d81, type: 3}
+  jumpSprite: {fileID: 21300000, guid: cd6631fced6d4442bb071d51f53b1026, type: 3}
+  jumpTimeThreshold: 0.2
   pushCooldown: 0.1
 --- !u!1 &501756152
 GameObject:
