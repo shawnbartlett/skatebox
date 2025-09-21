@@ -7,7 +7,7 @@ Physics driven pixel protoype.
 ## Push Kick
 ![Push Kick](Devlogs/pushkick.gif)
 
-##
+## Ramp Jump
 ![Ramp Jump](Devlogs/rampjump.gif)
 
 ## TODO (Sample)
