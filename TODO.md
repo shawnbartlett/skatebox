@@ -17,15 +17,20 @@
 [x] Mouse rotation controls character spin during jump charge
 [x] Update Sprite art for event states
 - FIXME: Bug in crouch and crouch left/right flicker
+- Magnetic landing helper (Click and hold to land/grind, single click for tricks)
 - Skatable Level Loop
 - Basic UI
-- Trick scoring system
+- Trick scoring system (Trick name popups, screenshake/freeze frame, ding sound, escalating combo sounds)
+- Skater velocity tied to score
 - Core loop established
 - Simple Parallax Background
+- Finite State Machine | Refactor code using Enum
 
 ## 3rd Phase
 - Obstacle prefabs (box, rails)
-- Manual nose/tail grind/slide
+- Grinds (Needs FSM)
+- Manual nose/tail grind/slide (Needs FSM)
+- Finalize / Tune Scoring after FSM
 - Simple Background scenery
 - Simple foreground scenery
 - Procedural single Level / difficulty scales with time 

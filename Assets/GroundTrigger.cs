@@ -6,6 +6,7 @@ public class GroundTrigger : MonoBehaviour
 {
 
     public float checkDistance = 0.1f;  //distance down
+    public float landingDistance = 5f;  //distance for landing
     public LayerMask groundLayer;   // ground in inspector
     public bool isGrounded = false;
 
@@ -34,5 +35,13 @@ public class GroundTrigger : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    public RaycastHit2D CheckLandingProx()
+    {
+        return Physics2D.Raycast(transform.position, Vector2.down,
+        landingDistance, groundLayer);
+
+        
     }
 }

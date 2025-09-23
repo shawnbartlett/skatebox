@@ -26,8 +26,10 @@ public class SkaterController : MonoBehaviour
   public float pushForce = 1.4f;  //strength per click
   public float maxSpeed = 7f;  // hard speed cap
   public float spinForce = 1f;  //spin power
+  public float spinSlowDownStrength = 5f;  //magnetize slow 
+  public float lastAngularVelocity;
 
-  public float numberOfFlips = 1; // n number of spin rotations
+  
   private bool spinLeft = false;
   private bool spinRight = false;
   private bool canJump = false;
@@ -67,12 +69,25 @@ public class SkaterController : MonoBehaviour
 
   void CheckInput()
     {
-      if (!groundCheck.isGrounded) return;    //exit if no ground touchy
+    //if (!groundCheck.isGrounded) return;    //exit if no ground touchy
+    if (!groundCheck.isGrounded)
+    {
+      if (Input.GetMouseButton(0))
+      {
+        //AirBrake(); //tried an airbrake
+      }
+      if (Input.GetMouseButtonUp(0))
+      {
+        //rb.angularVelocity = lastAngularVelocity; //tried a return spin
+      }
+      
+      return;
+    }
 
       if (Input.GetMouseButtonDown(0))
-      {
-        jumpTime = 0f;
-      }
+    {
+      jumpTime = 0f;
+    }
 
       if (Input.GetMouseButton(0))
       {
@@ -153,7 +168,7 @@ public class SkaterController : MonoBehaviour
       }
 
       rb.AddTorque(spinForce * torque, ForceMode2D.Impulse);
-
+      
       spinLeft = false;
       spinRight = false;
     }
@@ -177,7 +192,11 @@ public class SkaterController : MonoBehaviour
     }
     */
   }
-  
+
+  void AirBrake()
+  {
+    rb.angularVelocity = Mathf.Lerp(rb.angularVelocity, 0f, Time.deltaTime * spinSlowDownStrength);
+  }
 
   private IEnumerator SpriteSwitchPush()
   {
