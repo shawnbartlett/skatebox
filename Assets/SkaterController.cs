@@ -156,7 +156,7 @@ public class SkaterController : MonoBehaviour
   void ApplyJumpForce()
     {
       rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-
+      
       float torque = 0f;
       if (spinLeft)
       {
@@ -167,7 +167,8 @@ public class SkaterController : MonoBehaviour
         torque = -spinForce;
       }
 
-      rb.AddTorque(spinForce * torque, ForceMode2D.Impulse);
+     rb.AddTorque(spinForce * torque, ForceMode2D.Impulse);
+  
       
       spinLeft = false;
       spinRight = false;

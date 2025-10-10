@@ -16,17 +16,17 @@
 [x] Mouse Cursor Visible / Cursor Lock
 [x] Mouse rotation controls character spin during jump charge
 [x] Update Sprite art for event states
+- Magnetic landing helper (Click and hold to land/grind, single click for tricks)
+- Finite State Machine | Refactor code using Enum
 - Rebuild death state: Ragdoll on headbonk, reset on map fall. 
 - Build physics ragoll gameobjects for each skater part
 - Sprites for ragdoll parts
-- Magnetic landing helper (Click and hold to land/grind, single click for tricks)
 - Skatable Level Loop
 - Basic UI
 - Trick scoring system (Trick name popups, screenshake/freeze frame, ding sound, escalating combo sounds)
 - Skater velocity tied to score
 - Core loop established
 - Simple Parallax Background
-- Finite State Machine | Refactor code using Enum
 - FIXME: Bug in crouch and crouch left/right flicker
 
 ## 3rd Phase
