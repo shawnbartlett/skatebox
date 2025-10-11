@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
+    public GameObject scorePopupPrefab;
+    public GameObject bankedPopupPrefab;
+    public Transform skaterTransform;
+    public Canvas worldCanvas;
 
     public float currentCombo = 0f;
     public float totalScore = 0f;
@@ -13,12 +18,25 @@ public class ScoreManager : MonoBehaviour
     {
         currentCombo += amount;
         Debug.Log("+" + amount + " (Combo now: " + currentCombo + " )");
+
+        GameObject popup = Instantiate(scorePopupPrefab, worldCanvas.transform);
+        var rt = popup.GetComponent<RectTransform>();
+        rt.position = skaterTransform.position + Vector3.up * 1.5f;
+
+        popup.GetComponent<TextMeshProUGUI>().text = $"+{amount}";
+        Destroy(popup, 1f);
     }
+
 
     public void BankPoints()
     {
+        if (currentCombo == 0) return;
         totalScore += currentCombo;
-        Debug.Log("BANKED" + currentCombo + " (Total now: " + totalScore + " )");
+        GameObject popup = Instantiate(bankedPopupPrefab, worldCanvas.transform);
+        var rt = popup.GetComponent<RectTransform>();
+        rt.position = skaterTransform.position + Vector3.up * 1.5f;
+        popup.GetComponent<TextMeshProUGUI>().text = $"+{currentCombo} BANKED!";
+        Destroy(popup, 1f);
         currentCombo = 0f;
     }
 
