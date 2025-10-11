@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 73230861}
   - component: {fileID: 73230860}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,8 +183,9 @@ GameObject:
   m_Component:
   - component: {fileID: 255652894}
   - component: {fileID: 255652899}
-  - component: {fileID: 255652898}
   - component: {fileID: 255652897}
+  - component: {fileID: 255652901}
+  - component: {fileID: 255652900}
   m_Layer: 11
   m_Name: Skater
   m_TagString: Untagged
@@ -237,34 +238,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &255652898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 255652892}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7775ad55a33e94882ad7dece132bbefb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundCheck: {fileID: 969725164}
-  spriteRenderer: {fileID: 1832935866}
-  rideSprite: {fileID: 21300000, guid: 7d09395158aef42c4b63e2ac13c87128, type: 3}
-  pushSprite: {fileID: 21300000, guid: 46f442ea89e394440bfd8e053c4a871c, type: 3}
-  crouchSprite: {fileID: 21300000, guid: 7bef7ce40016746e9b4a5d67a1ca3d81, type: 3}
-  jumpSprite: {fileID: 21300000, guid: cd6631fced6d4442bb071d51f53b1026, type: 3}
-  crouchRight: {fileID: 21300000, guid: 9ce427dd8066a4e5592c0166b268de1d, type: 3}
-  crouchLeft: {fileID: 21300000, guid: 48592862c00d24fa4bb1eef480886d5c, type: 3}
-  jumpTimeThreshold: 0.2
-  jumpForce: 3
-  pushForce: 1.4
-  maxSpeed: 7
-  spinForce: 0.425
-  spinSlowDownStrength: 5
-  lastAngularVelocity: 0
-  pushCooldown: 0.1
 --- !u!114 &255652899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +266,86 @@ MonoBehaviour:
   spinSlowDownStrength: 5
   lastAngularVelocity: 0
   pushCooldown: 0.1
+--- !u!58 &255652900
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255652892}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.2768618}
+  serializedVersion: 2
+  m_Radius: 0.59
+--- !u!61 &255652901
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255652892}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: d35ea119f00ef4a83ab2aa31c746c1f4, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.000000029802322, y: -0.0934453}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.38092518, y: 0.5794964}
+  m_EdgeRadius: 0
 --- !u!1001 &464120262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -786,7 +839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1083423609}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ramps
   m_TagString: Untagged
   m_Icon: {fileID: 0}

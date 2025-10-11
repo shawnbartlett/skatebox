@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class SideTrigger : MonoBehaviour
 {
-    public bool isTouchingGround = false;
-
+   public bool isTouchingGround = false;
+   private SkateControllerFSM skater;
    private GameManager gm;
 
    // Start is called before the first frame update
    void Start()
    {
       gm = FindAnyObjectByType<GameManager>();
+      skater = GetComponentInParent<SkateControllerFSM>();
    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-      gm.ResetPlayer();
+      
+      skater.Bonk();
+      //gm.ResetPlayer();
       isTouchingGround = true;
     }
 

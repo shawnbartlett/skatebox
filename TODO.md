@@ -16,8 +16,8 @@
 [x] Mouse Cursor Visible / Cursor Lock
 [x] Mouse rotation controls character spin during jump charge
 [x] Update Sprite art for event states
-- Magnetic landing helper (Click and hold to land/grind, single click for tricks)
-- Finite State Machine | Refactor code using Enum
+[x] Simple Magnetic landing helper 
+[x] Finite State Machine | Refactor code using Enum
 - Rebuild death state: Ragdoll on headbonk, reset on map fall. 
 - Build physics ragoll gameobjects for each skater part
 - Sprites for ragdoll parts
@@ -31,6 +31,7 @@
 
 ## 3rd Phase
 - Obstacle prefabs (box, rails)
+- Full Magnetic Landing
 - Grinds (Needs FSM)
 - Manual nose/tail grind/slide (Needs FSM)
 - Finalize / Tune Scoring after FSM

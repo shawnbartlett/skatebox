@@ -8,7 +8,8 @@ public class SkateControllerFSM : MonoBehaviour
     public enum SkaterState
     {
         Grounded,
-        Airborne
+        Airborne,
+        Crashed
     }
 
     private SkaterState currentState;
@@ -26,12 +27,16 @@ public class SkateControllerFSM : MonoBehaviour
 
     public float jumpTimeThreshold = 0.2f;
     private float jumpTime;
+    private float airInputTime;
+    private float landingAssistThreshold = 0.2f;
+    private bool landingAssistActive = false;
     public float jumpForce = 5f;
     public float pushForce = 1.4f;  //strength per click
     public float maxSpeed = 7f;  // hard speed cap
     public float spinForce = 1f;  //spin power
     public float spinSlowDownStrength = 5f;  //magnetize slow 
-    public float lastAngularVelocity;
+    private float lastAngularVelocity;
+
 
 
     private bool spinLeft = false;
@@ -45,7 +50,7 @@ public class SkateControllerFSM : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.centerOfMass = Vector2.zero;     // reset com to middle of skater
-       
+
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
 
@@ -54,25 +59,30 @@ public class SkateControllerFSM : MonoBehaviour
 
     void Update()
     {
-        if (groundCheck.isGrounded && currentState != SkaterState.Grounded)
-        {
-            currentState = SkaterState.Grounded;
-        }
-        else if (!groundCheck.isGrounded && currentState != SkaterState.Airborne)
-        {
-            currentState = SkaterState.Airborne;
-        }
+        
 
         Debug.Log(currentState);
-        
+
         switch (currentState)
         {
             case SkaterState.Grounded:
+                if (!groundCheck.isGrounded)
+                {
+                    currentState = SkaterState.Airborne;
+                }
                 HandleGrounded();
                 break;
 
             case SkaterState.Airborne:
+                 if (groundCheck.isGrounded)
+                {
+                    currentState = SkaterState.Grounded;
+                }
                 HandleAirborne();
+                break;
+
+            case SkaterState.Crashed:
+                HandleCrashRecovery();
                 break;
         }
     }
@@ -109,8 +119,38 @@ public class SkateControllerFSM : MonoBehaviour
 
     void HandleAirborne()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            airInputTime = 0f;
+        }
 
+        if (Input.GetMouseButton(0))
+        {
+            airInputTime += Time.deltaTime;
+
+            if (airInputTime > landingAssistThreshold)
+            {
+                landingAssistActive = true;
+            }
+        }
+
+        else
+        {
+            landingAssistActive = false;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (airInputTime <= landingAssistThreshold)
+            {
+                //DoTrick();
+                //StartCoroutine(SpriteSwitchPush());
+            }
+
+            airInputTime = 0f;
+        }
     }
+
 
     void HandleGroundInput()
     {
@@ -149,99 +189,155 @@ public class SkateControllerFSM : MonoBehaviour
         }
     }
 
+
     void SetSpinDirection()
     {
-    float mouseDirection = Input.GetAxis("Mouse X");
+        float mouseDirection = Input.GetAxis("Mouse X");
 
-    if (mouseDirection < -0.05f && !spinLeft)
-    {
-      spinLeft = true;
-      spinRight = false;
-      spriteRenderer.sprite = crouchLeft;
-      StartCoroutine(ResetSpin());
-    }
-    else if (mouseDirection > 0.05f && !spinRight)
-    {
-      spinRight = true;
-      spinLeft = false;
-      spriteRenderer.sprite = crouchRight;
-      StartCoroutine(ResetSpin());
-    }
+        if (mouseDirection < -0.05f && !spinLeft)
+        {
+            spinLeft = true;
+            spinRight = false;
+            spriteRenderer.sprite = crouchLeft;
+            StartCoroutine(ResetSpin());
+        }
+        else if (mouseDirection > 0.05f && !spinRight)
+        {
+            spinRight = true;
+            spinLeft = false;
+            spriteRenderer.sprite = crouchRight;
+            StartCoroutine(ResetSpin());
+        }
 
-    else if (!spinLeft && !spinRight)
-    {
-      spriteRenderer.sprite = crouchSprite;
-    }
-   
-  }
+        else if (!spinLeft && !spinRight)
+        {
+            spriteRenderer.sprite = crouchSprite;
+        }
 
-  void TryPushCooldown()
-    {
-      if (Time.time - lastPushTime >= pushCooldown)
-      {
-        canPush = true;
-        lastPushTime = Time.time;
-      }
     }
 
-  void ApplyJumpForce()
+    void TryPushCooldown()
     {
-      rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-      
-      float torque = 0f;
-      if (spinLeft)
-      {
-        torque = spinForce;
-      }
-      else if (spinRight)
-      {
-        torque = -spinForce;
-      }
-
-     rb.AddTorque(spinForce * torque, ForceMode2D.Impulse);
-  
-      
-      spinLeft = false;
-      spinRight = false;
+        if (Time.time - lastPushTime >= pushCooldown)
+        {
+            canPush = true;
+            lastPushTime = Time.time;
+        }
     }
 
-  void ApplyPushForce()
+    void ApplyJumpForce()
     {
-      float currentSpeed = Mathf.Abs(rb.velocity.x);
-      float ratio = Mathf.Clamp01(1f - (currentSpeed / maxSpeed));
-      float effectiveForce = pushForce * ratio;
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
-      rb.AddForce(Vector2.right * effectiveForce, ForceMode2D.Impulse);
+        float torque = 0f;
+        if (spinLeft)
+        {
+            torque = spinForce;
+        }
+        else if (spinRight)
+        {
+            torque = -spinForce;
+        }
+
+        rb.AddTorque(spinForce * torque, ForceMode2D.Impulse);
+
+
+        spinLeft = false;
+        spinRight = false;
     }
 
-  private IEnumerator SpriteSwitchPush()
-  {
-    spriteRenderer.sprite = pushSprite;
-    yield return new WaitForSeconds(0.1f);  //can adjust 
-    if (groundCheck.isGrounded)
+    void ApplyPushForce()
     {
-      spriteRenderer.sprite = rideSprite;
+        float currentSpeed = Mathf.Abs(rb.velocity.x);
+        float ratio = Mathf.Clamp01(1f - (currentSpeed / maxSpeed));
+        float effectiveForce = pushForce * ratio;
+
+        rb.AddForce(Vector2.right * effectiveForce, ForceMode2D.Impulse);
     }
-  }
 
-  private IEnumerator SpriteSwitchJump()
-  {
-    spriteRenderer.sprite = jumpSprite;
+    private IEnumerator SpriteSwitchPush()
+    {
+        spriteRenderer.sprite = pushSprite;
+        yield return new WaitForSeconds(0.1f);  //can adjust 
+        if (groundCheck.isGrounded)
+        {
+            spriteRenderer.sprite = rideSprite;
+        }
+    }
 
-    yield return new WaitUntil(() => rb.velocity.y <= 0f);
-    spriteRenderer.sprite = rideSprite;
+    private IEnumerator SpriteSwitchJump()
+    {
+        spriteRenderer.sprite = jumpSprite;
 
-    yield return new WaitUntil(() => groundCheck.isGrounded);
-    spriteRenderer.sprite = crouchSprite;
+        yield return new WaitUntil(() => rb.velocity.y <= 0f);
+        spriteRenderer.sprite = rideSprite;
 
-    yield return new WaitForSeconds(0.1f); //can adjust
-    spriteRenderer.sprite = rideSprite;
-  }
+        yield return new WaitUntil(() => groundCheck.isGrounded);
+        spriteRenderer.sprite = crouchSprite;
 
-  IEnumerator ResetSpin()
-  {
-    yield return new WaitForSeconds(0.4f);
-    spinLeft = false;
-    spinRight = false;
-  }
+        yield return new WaitForSeconds(0.1f); //can adjust
+        spriteRenderer.sprite = rideSprite;
+    }
+
+    IEnumerator ResetSpin()
+    {
+        yield return new WaitForSeconds(0.4f);
+        spinLeft = false;
+        spinRight = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!landingAssistActive) return;
+
+        rb.angularVelocity = 0f;
+
+        rb.MoveRotation(0f);
+    }
+
+    public void Bonk()
+    {
+        landingAssistActive = false;
+        currentState = SkaterState.Crashed;
+        rb.angularVelocity = 0f;
+
+
+        rb.drag = 0.1f;
+        rb.angularDrag = 0.1f;
+    }
+
+    private void HandleCrashRecovery()
+    {
+
+        if (rb.velocity.magnitude < 0.2f)
+        {
+            StartCoroutine(ResetCharacterAfterCrash());
+            StartCoroutine(CharacterResetBlink());
+        }
+    }
+
+    private IEnumerator ResetCharacterAfterCrash()
+    {
+        rb.angularVelocity = 0f;
+        rb.AddForce(Vector2.up * 2f, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.4f);  //can adjust
+        rb.rotation = 0f;
+
+        rb.drag = 0.02f;
+        rb.angularDrag = 0.05f;
+
+        currentState = SkaterState.Grounded;
+
+    }
+    private IEnumerator CharacterResetBlink()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(0.15f);
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(0.15f);
+        }
+    }
+    
 }
