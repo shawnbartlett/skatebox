@@ -13,6 +13,7 @@ public class SkateControllerFSM : MonoBehaviour
     }
 
     private SkaterState currentState;
+    public ScoreManager scoreManager;
 
     public GroundTrigger groundCheck;
 
@@ -61,7 +62,7 @@ public class SkateControllerFSM : MonoBehaviour
     {
         
 
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
 
         switch (currentState)
         {
@@ -76,6 +77,7 @@ public class SkateControllerFSM : MonoBehaviour
             case SkaterState.Airborne:
                  if (groundCheck.isGrounded)
                 {
+                    scoreManager.BankPoints();
                     currentState = SkaterState.Grounded;
                 }
                 HandleAirborne();
@@ -95,6 +97,7 @@ public class SkateControllerFSM : MonoBehaviour
             {
                 //physics stuff here
                 ApplyPushForce();
+                scoreManager.AddPoints(2); //2 points for push
                 canPush = false;
             }
 
@@ -300,6 +303,7 @@ public class SkateControllerFSM : MonoBehaviour
     {   
         landingAssistActive = false;
         currentState = SkaterState.Crashed;
+        scoreManager.ResetCombo();
         rb.angularVelocity = 0f;
         rb.drag = 0.1f;
         rb.angularDrag = 0.1f;
