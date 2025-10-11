@@ -182,6 +182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 255652894}
+  - component: {fileID: 255652899}
   - component: {fileID: 255652898}
   - component: {fileID: 255652897}
   m_Layer: 11
@@ -243,9 +244,37 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 255652892}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7775ad55a33e94882ad7dece132bbefb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheck: {fileID: 969725164}
+  spriteRenderer: {fileID: 1832935866}
+  rideSprite: {fileID: 21300000, guid: 7d09395158aef42c4b63e2ac13c87128, type: 3}
+  pushSprite: {fileID: 21300000, guid: 46f442ea89e394440bfd8e053c4a871c, type: 3}
+  crouchSprite: {fileID: 21300000, guid: 7bef7ce40016746e9b4a5d67a1ca3d81, type: 3}
+  jumpSprite: {fileID: 21300000, guid: cd6631fced6d4442bb071d51f53b1026, type: 3}
+  crouchRight: {fileID: 21300000, guid: 9ce427dd8066a4e5592c0166b268de1d, type: 3}
+  crouchLeft: {fileID: 21300000, guid: 48592862c00d24fa4bb1eef480886d5c, type: 3}
+  jumpTimeThreshold: 0.2
+  jumpForce: 3
+  pushForce: 1.4
+  maxSpeed: 7
+  spinForce: 0.425
+  spinSlowDownStrength: 5
+  lastAngularVelocity: 0
+  pushCooldown: 0.1
+--- !u!114 &255652899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255652892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8a1ea6a314a74d8194317461033bab6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 969725164}
