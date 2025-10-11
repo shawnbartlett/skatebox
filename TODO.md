@@ -18,7 +18,7 @@
 [x] Update Sprite art for event states
 [x] Simple Magnetic landing helper 
 [x] Finite State Machine | Refactor code using Enum
-- Rebuild death state: Ragdoll on headbonk, reset on map fall. 
+[x] Rebuild death state: Ragdoll on headbonk, reset on map fall. 
 - Build physics ragoll gameobjects for each skater part
 - Sprites for ragdoll parts
 - Skatable Level Loop

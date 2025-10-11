@@ -262,9 +262,8 @@ MonoBehaviour:
   jumpForce: 3
   pushForce: 1.4
   maxSpeed: 7
-  spinForce: 0.425
+  spinForce: 0.8
   spinSlowDownStrength: 5
-  lastAngularVelocity: 0
   pushCooldown: 0.1
 --- !u!58 &255652900
 CircleCollider2D:
@@ -298,9 +297,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.2768618}
+  m_Offset: {x: 0, y: -0.44}
   serializedVersion: 2
-  m_Radius: 0.59
+  m_Radius: 0.31
 --- !u!61 &255652901
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -333,7 +332,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000000029802322, y: -0.0934453}
+  m_Offset: {x: 0.000000029802322, y: 0.0653398}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -344,7 +343,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.38092518, y: 0.5794964}
+  m_Size: {x: 0.29, y: 0.882812}
   m_EdgeRadius: 0
 --- !u!1001 &464120262
 PrefabInstance:
@@ -1017,7 +1016,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.27, y: 0.27}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.06
 --- !u!114 &1332572201
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -144,7 +144,7 @@ public class SkateControllerFSM : MonoBehaviour
             if (airInputTime <= landingAssistThreshold)
             {
                 //DoTrick();
-                //StartCoroutine(SpriteSwitchPush());
+                
             }
 
             airInputTime = 0f;
@@ -292,16 +292,15 @@ public class SkateControllerFSM : MonoBehaviour
 
         rb.angularVelocity = 0f;
 
-        rb.MoveRotation(0f);
+        //rb.MoveRotation(0f);
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
 
     public void Bonk()
-    {
+    {   
         landingAssistActive = false;
         currentState = SkaterState.Crashed;
         rb.angularVelocity = 0f;
-
-
         rb.drag = 0.1f;
         rb.angularDrag = 0.1f;
     }
@@ -323,8 +322,8 @@ public class SkateControllerFSM : MonoBehaviour
         yield return new WaitForSeconds(0.4f);  //can adjust
         rb.rotation = 0f;
 
-        rb.drag = 0.02f;
-        rb.angularDrag = 0.05f;
+        rb.drag = 0.01f;
+        rb.angularDrag = 0.02f;
 
         currentState = SkaterState.Grounded;
 
