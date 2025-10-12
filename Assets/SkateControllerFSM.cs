@@ -14,6 +14,9 @@ public class SkateControllerFSM : MonoBehaviour
 
     private SkaterState currentState;
     public ScoreManager scoreManager;
+    public Collider2D boardCollider;
+    public PhysicsMaterial2D normalFriction;
+    public PhysicsMaterial2D crashFriction;
 
     public GroundTrigger groundCheck;
 
@@ -56,6 +59,7 @@ public class SkateControllerFSM : MonoBehaviour
         UnityEngine.Cursor.visible = false;
 
         currentState = SkaterState.Grounded;
+        boardCollider.sharedMaterial = normalFriction;
     }
 
     void Update()
@@ -84,6 +88,7 @@ public class SkateControllerFSM : MonoBehaviour
                 break;
 
             case SkaterState.Crashed:
+                boardCollider.sharedMaterial = crashFriction;
                 HandleCrashRecovery();
                 break;
         }
@@ -331,6 +336,7 @@ public class SkateControllerFSM : MonoBehaviour
         rb.drag = 0.01f;
         rb.angularDrag = 0.02f;
 
+        boardCollider.sharedMaterial = normalFriction;
         currentState = SkaterState.Grounded;
 
     }
