@@ -19,7 +19,9 @@
 [x] Simple Magnetic landing helper 
 [x] Finite State Machine | Refactor code using Enum
 [x] Rebuild death state: Ragdoll on headbonk, reset on map fall. 
-- Basic Trick / Score
+[x] Air Score
+- Basic Trick
+- Bonk as a trick not a fail state
 - Build physics ragoll gameobjects for each skater part
 - Sprites for ragdoll parts
 - Skatable Level Loop

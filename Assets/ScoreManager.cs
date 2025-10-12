@@ -16,15 +16,16 @@ public class ScoreManager : MonoBehaviour
 
     public void AddPoints(float amount)
     {
-        currentCombo += amount;
-        Debug.Log("+" + amount + " (Combo now: " + currentCombo + " )");
+        int rounded = Mathf.RoundToInt(amount);
+        currentCombo += rounded;
+        Debug.Log("+" + rounded + " (Combo now: " + currentCombo + " )");
 
         GameObject popup = Instantiate(scorePopupPrefab, worldCanvas.transform);
         var rt = popup.GetComponent<RectTransform>();
         rt.position = skaterTransform.position + Vector3.up * 1.5f;
 
-        popup.GetComponent<TextMeshProUGUI>().text = $"+{amount}";
-        Destroy(popup, 1f);
+        popup.GetComponent<TextMeshProUGUI>().text = $"+{currentCombo}";
+        //Destroy(popup, 0.4f);
     }
 
 

@@ -14,7 +14,8 @@ public class SkateControllerFSM : MonoBehaviour
 
     private SkaterState currentState;
     public ScoreManager scoreManager;
-    public Collider2D boardCollider;
+    private Collider2D boardCollider;
+    private Collider2D playerCollider;
     public PhysicsMaterial2D normalFriction;
     public PhysicsMaterial2D crashFriction;
 
@@ -39,8 +40,7 @@ public class SkateControllerFSM : MonoBehaviour
     public float maxSpeed = 7f;  // hard speed cap
     public float spinForce = 1f;  //spin power
     public float spinSlowDownStrength = 5f;  //magnetize slow 
-
-
+    private float airScoreTimer = 0f;
 
 
     private bool spinLeft = false;
@@ -59,6 +59,8 @@ public class SkateControllerFSM : MonoBehaviour
         UnityEngine.Cursor.visible = false;
 
         currentState = SkaterState.Grounded;
+        playerCollider = GetComponent<Collider2D>();
+        boardCollider = GetComponentInChildren<Collider2D>();
         boardCollider.sharedMaterial = normalFriction;
     }
 
@@ -79,10 +81,11 @@ public class SkateControllerFSM : MonoBehaviour
                 break;
 
             case SkaterState.Airborne:
-                 if (groundCheck.isGrounded)
+                if (groundCheck.isGrounded)
                 {
                     scoreManager.BankPoints();
                     currentState = SkaterState.Grounded;
+                    airScoreTimer = 0f;
                 }
                 HandleAirborne();
                 break;
@@ -111,12 +114,19 @@ public class SkateControllerFSM : MonoBehaviour
             {
                 ApplyJumpForce();
                 canJump = false;
+                landingAssistActive = true;
             }
         }
 
         else if (currentState == SkaterState.Airborne)
         {
-            // physics
+            airScoreTimer += Time.deltaTime;
+            if (airScoreTimer >= 0.2f)
+            {
+                scoreManager.AddPoints(1); //add points 
+                airScoreTimer = 0f;
+            }
+            
 
         }
     }
@@ -139,13 +149,13 @@ public class SkateControllerFSM : MonoBehaviour
 
             if (airInputTime > landingAssistThreshold)
             {
-                landingAssistActive = true;
+                //landingAssistActive = true;
             }
         }
 
         else
         {
-            landingAssistActive = false;
+            //landingAssistActive = false;
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -298,12 +308,11 @@ public class SkateControllerFSM : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //if (!landingAssistActive) return;
+        if (!landingAssistActive) return;
 
         rb.angularVelocity = 0f;
-
-        //rb.MoveRotation(0f);
-        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0f, 0f, 0f), 0.4f);
     }
 
     public void Bonk()
@@ -329,6 +338,8 @@ public class SkateControllerFSM : MonoBehaviour
     private IEnumerator ResetCharacterAfterCrash()
     {
         rb.angularVelocity = 0f;
+        boardCollider.enabled = false;
+        playerCollider.enabled = false;
         rb.AddForce(Vector2.up * 2f, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.4f);  //can adjust
         rb.rotation = 0f;
@@ -336,7 +347,10 @@ public class SkateControllerFSM : MonoBehaviour
         rb.drag = 0.01f;
         rb.angularDrag = 0.02f;
 
+        boardCollider.enabled = true;
+        playerCollider.enabled = true;
         boardCollider.sharedMaterial = normalFriction;
+        landingAssistActive = true;
         currentState = SkaterState.Grounded;
 
     }
