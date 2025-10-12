@@ -36,7 +36,7 @@ public class SkateControllerFSM : MonoBehaviour
     public float maxSpeed = 7f;  // hard speed cap
     public float spinForce = 1f;  //spin power
     public float spinSlowDownStrength = 5f;  //magnetize slow 
-    private float lastAngularVelocity;
+
 
 
 
@@ -93,7 +93,8 @@ public class SkateControllerFSM : MonoBehaviour
     {
         if (currentState == SkaterState.Grounded)
         {
-            if (canPush && Mathf.Abs(rb.velocity.x) < maxSpeed)
+            float scaledMaxSpeed = maxSpeed + (scoreManager.totalScore * 1f);
+            if (canPush && Mathf.Abs(rb.velocity.x) < scaledMaxSpeed)
             {
                 //physics stuff here
                 ApplyPushForce();
@@ -251,8 +252,9 @@ public class SkateControllerFSM : MonoBehaviour
 
     void ApplyPushForce()
     {
+        float scaledMaxSpeed = maxSpeed + (scoreManager.totalScore * 1f);
         float currentSpeed = Mathf.Abs(rb.velocity.x);
-        float ratio = Mathf.Clamp01(1f - (currentSpeed / maxSpeed));
+        float ratio = Mathf.Clamp01(1f - (currentSpeed / scaledMaxSpeed));
         float effectiveForce = pushForce * ratio;
 
         rb.AddForce(Vector2.right * effectiveForce, ForceMode2D.Impulse);
@@ -291,7 +293,7 @@ public class SkateControllerFSM : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!landingAssistActive) return;
+        //if (!landingAssistActive) return;
 
         rb.angularVelocity = 0f;
 
