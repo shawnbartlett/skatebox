@@ -16,7 +16,10 @@ Physics driven pixel protoype.
 ## Flip
 ![Flip](Devlogs/flip.gif)
 
+## Air Score
+![Score](Devlogs/airscore.gif)
+
 ## TODO (Sample)
-[x] Push kick
-- Skatable level map
+[x] Push kick, Jump, Flip
 - Tricks and scoring system
+- Procedural Skatable map
