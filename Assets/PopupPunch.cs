@@ -25,8 +25,8 @@ public class PopupPunch : MonoBehaviour
         transform.localScale /= 1.3f;
 
         Vector3 startPos = transform.position;
-        Vector3 endPos = startPos + Vector3.up * 0.2f;
-        //transform.position += Vector3.up * 0.2f;
+        Vector3 endPos = startPos + new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(1.0f, 1.5f), 0f);
+        
 
         float t = 0f;
         while (t < 1f)
@@ -35,7 +35,7 @@ public class PopupPunch : MonoBehaviour
             transform.position = Vector3.Lerp(startPos, endPos, t);
             yield return null;
         }
-        Destroy(gameObject, 0.1f);
+        Destroy(gameObject, 0.2f);
 
     }
 }

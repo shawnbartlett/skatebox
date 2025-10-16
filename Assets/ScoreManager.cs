@@ -5,29 +5,47 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    private SkateControllerFSM skater;
+    
     public static ScoreManager Instance;
     public GameObject scorePopupPrefab;
     public GameObject bankedPopupPrefab;
     public GameObject deathPopupPrefab;
+    public GameObject comboPopupPrefab;
     public Transform skaterTransform;
     public Canvas worldCanvas;
 
     public float currentCombo = 0f;
     public float totalScore = 0f;
 
-    public void AddPoints(float amount)
+    public void ComboPoints()
+    {
+        //Debug.Log("+" + rounded + " (Combo now: " + currentCombo + " )");
+
+        GameObject popup = Instantiate(comboPopupPrefab, worldCanvas.transform);
+        var rt = popup.GetComponent<RectTransform>();
+        rt.position = skaterTransform.position + Vector3.up * 3f;
+
+        popup.GetComponent<TextMeshProUGUI>().text = $"+{currentCombo}";
+        Destroy(popup, 0.5f);
+        
+    }
+
+    public void AddPoints(float amount, Color color)
     {
         int rounded = Mathf.RoundToInt(amount);
         currentCombo += rounded;
-        Debug.Log("+" + rounded + " (Combo now: " + currentCombo + " )");
 
         GameObject popup = Instantiate(scorePopupPrefab, worldCanvas.transform);
         var rt = popup.GetComponent<RectTransform>();
         rt.position = skaterTransform.position + Vector3.up * 1.5f;
 
-        popup.GetComponent<TextMeshProUGUI>().text = $"+{currentCombo}";
-        //Destroy(popup, 0.4f);
+        TMP_Text text = popup.GetComponent<TextMeshProUGUI>();
+
+        text.text = $"{amount}";
+        text.color = color;
+
+        ComboPoints();
+
     }
 
     public void BankPoints()

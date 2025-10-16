@@ -38,6 +38,8 @@ public class SkateControllerFSM : MonoBehaviour
     private bool landingAssistActive = false;
     public float jumpForce = 5f;
     public float pushForce = 1.4f;  //strength per click
+    private float speedThreshold = 3f;
+    private float speedTimer;
     public float maxSpeed = 7f;  // hard speed cap
     public float spinForce = 1f;  //spin power
     public float spinSlowDownStrength = 5f;  //magnetize slow 
@@ -104,6 +106,16 @@ public class SkateControllerFSM : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (rb.velocity.magnitude >= speedThreshold)
+        {
+            speedTimer += Time.deltaTime;
+            if (speedTimer >= 0.2f)
+            {
+                scoreManager.AddPoints(1, Color.green); //add points 
+                speedTimer = 0f;
+            }
+        }
+
         if (currentState == SkaterState.Grounded)
         {
             float scaledMaxSpeed = maxSpeed + (scoreManager.totalScore * 1f);
@@ -111,7 +123,7 @@ public class SkateControllerFSM : MonoBehaviour
             {
                 //physics stuff here
                 ApplyPushForce();
-                scoreManager.AddPoints(2); //2 points for push
+                scoreManager.AddPoints(2, Color.yellow); //2 points for push
                 canPush = false;
             }
 
@@ -128,11 +140,9 @@ public class SkateControllerFSM : MonoBehaviour
             airScoreTimer += Time.deltaTime;
             if (airScoreTimer >= 0.2f)
             {
-                scoreManager.AddPoints(1); //add points 
+                scoreManager.AddPoints(1, Color.blue); //add points 
                 airScoreTimer = 0f;
             }
-            
-
         }
     }
 
