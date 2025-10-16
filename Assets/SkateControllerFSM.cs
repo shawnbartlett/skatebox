@@ -9,7 +9,8 @@ public class SkateControllerFSM : MonoBehaviour
     {
         Grounded,
         Airborne,
-        Crashed
+        Crashed, 
+        Death
     }
 
     private SkaterState currentState;
@@ -66,7 +67,7 @@ public class SkateControllerFSM : MonoBehaviour
 
     void Update()
     {
-        
+
 
         //Debug.Log(currentState);
 
@@ -92,6 +93,10 @@ public class SkateControllerFSM : MonoBehaviour
 
             case SkaterState.Crashed:
                 boardCollider.sharedMaterial = crashFriction;
+                HandleCrashRecovery();
+                break;
+
+            case SkaterState.Death:
                 HandleCrashRecovery();
                 break;
         }
@@ -129,6 +134,11 @@ public class SkateControllerFSM : MonoBehaviour
             
 
         }
+    }
+
+    public void SetState(SkaterState newState)
+    {
+        currentState = newState;
     }
 
     void HandleGrounded()

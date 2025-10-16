@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
+    public SkateControllerFSM skater;
     public Transform player;    //skater
     public Quaternion startRotation;
     public Vector3 startPosition;
-    public float deathY = -1.0f;      // fall below reset point
+    public ScoreManager scoreManager;
+    public float deathY = -1000.0f;      // fall below reset point
 
 
     // Start is called before the first frame update
@@ -26,10 +27,17 @@ public class GameManager : MonoBehaviour
         {
             ResetPlayer();
         }
+
+        if (Input.GetKeyDown("k"))
+        {
+            ResetPlayer();
+        }
     }
 
     public void ResetPlayer()
     {
+        skater.SetState(SkateControllerFSM.SkaterState.Death);
+        //Debug.Log("YOU DIED!");
         player.position = startPosition;
         player.rotation = startRotation;
 
@@ -39,5 +47,7 @@ public class GameManager : MonoBehaviour
             rb.velocity = Vector2.zero;
             rb.angularVelocity = 0f;
         }
+        
+        scoreManager.PlayerDeath();
     }
 }

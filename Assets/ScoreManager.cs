@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    private SkateControllerFSM skater;
     public static ScoreManager Instance;
     public GameObject scorePopupPrefab;
     public GameObject bankedPopupPrefab;
+    public GameObject deathPopupPrefab;
     public Transform skaterTransform;
     public Canvas worldCanvas;
 
@@ -28,7 +30,6 @@ public class ScoreManager : MonoBehaviour
         //Destroy(popup, 0.4f);
     }
 
-
     public void BankPoints()
     {
         if (currentCombo == 0) return;
@@ -45,6 +46,15 @@ public class ScoreManager : MonoBehaviour
     {
         Debug.Log("Combo lost (" + currentCombo + ")");
         currentCombo = 0f;
+    }
+
+    public void PlayerDeath()
+    {
+        GameObject popup = Instantiate(deathPopupPrefab, worldCanvas.transform);
+        var rt = popup.GetComponent<RectTransform>();
+        rt.position = skaterTransform.position + Vector3.up * 1.5f;
+        popup.GetComponent<TextMeshProUGUI>().text = "YOU DIED!";
+        Destroy(popup, 5f);
     }
     // Start is called before the first frame update
     void Start()
