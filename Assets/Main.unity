@@ -442,6 +442,7 @@ MonoBehaviour:
   scorePopupPrefab: {fileID: 882352058433124797, guid: 18a6fd496738f48c8bcf69d63463c2af, type: 3}
   bankedPopupPrefab: {fileID: 882352058433124797, guid: 89f7ca567180b410d92cab08a47eb5c5, type: 3}
   deathPopupPrefab: {fileID: 882352058433124797, guid: 47bf87594566d48dd95c2f8d2a592ab9, type: 3}
+  comboPopupPrefab: {fileID: 882352058433124797, guid: ca1b5020f198448c78193411559a9770, type: 3}
   skaterTransform: {fileID: 255652894}
   worldCanvas: {fileID: 1509855595}
   currentCombo: 0

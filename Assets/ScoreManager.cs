@@ -11,6 +11,7 @@ public class ScoreManager : MonoBehaviour
     public GameObject bankedPopupPrefab;
     public GameObject deathPopupPrefab;
     public GameObject comboPopupPrefab;
+    private GameObject activeComboPopup;
     public Transform skaterTransform;
     public Canvas worldCanvas;
 
@@ -19,14 +20,16 @@ public class ScoreManager : MonoBehaviour
 
     public void ComboPoints()
     {
-        //Debug.Log("+" + rounded + " (Combo now: " + currentCombo + " )");
-
-        GameObject popup = Instantiate(comboPopupPrefab, worldCanvas.transform);
-        var rt = popup.GetComponent<RectTransform>();
+        if (activeComboPopup != null)
+        {
+            Destroy(activeComboPopup);
+        }
+        activeComboPopup = Instantiate(comboPopupPrefab, worldCanvas.transform);
+        var rt = activeComboPopup.GetComponent<RectTransform>();
         rt.position = skaterTransform.position + Vector3.up * 3f;
 
-        popup.GetComponent<TextMeshProUGUI>().text = $"+{currentCombo}";
-        Destroy(popup, 0.5f);
+        activeComboPopup.GetComponent<TextMeshProUGUI>().text = $"+{currentCombo}";
+        Destroy(activeComboPopup, 2f);
         
     }
 
@@ -54,7 +57,7 @@ public class ScoreManager : MonoBehaviour
         totalScore += currentCombo;
         GameObject popup = Instantiate(bankedPopupPrefab, worldCanvas.transform);
         var rt = popup.GetComponent<RectTransform>();
-        rt.position = skaterTransform.position + Vector3.up * 1.5f;
+        rt.position = skaterTransform.position + Vector3.up * 4f;
         popup.GetComponent<TextMeshProUGUI>().text = $"+{currentCombo} BANKED!";
         Destroy(popup, 1f);
         currentCombo = 0f;
