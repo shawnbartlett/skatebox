@@ -36,7 +36,7 @@ public class CameraFollow : MonoBehaviour
         Vector3 smoothedPosition = Vector3.Lerp(transform.position,
          desiredPostion, smoothSpeed * Time.deltaTime);
         
-        cam.orthographicSize = Mathf.Lerp(2f, 10f, Mathf.InverseLerp(0f, 10f, target.position.y));
+        //cam.orthographicSize = Mathf.Lerp(2f, 10f, Mathf.InverseLerp(0f, 10f, target.position.y));
         transform.position = smoothedPosition;
     }
 }

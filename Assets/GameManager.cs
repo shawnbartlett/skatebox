@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public Quaternion startRotation;
     public Vector3 startPosition;
     public ScoreManager scoreManager;
-    public float deathY = -1000.0f;      // fall below reset point
+    public float deathY = -100.0f;      // fall below reset point
 
 
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.position.y < deathY)
         {
-            ResetPlayer();
+            //ResetPlayer();
         }
 
         if (Input.GetKeyDown("k"))
