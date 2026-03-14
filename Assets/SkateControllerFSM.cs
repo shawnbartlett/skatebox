@@ -50,6 +50,7 @@ public class SkateControllerFSM : MonoBehaviour
     private bool spinRight = false;
     private bool canJump = false;
     private bool canPush = false;
+    private bool justLanded = false;
     private float lastPushTime = 0f;
     public float pushCooldown = 0.1f;
 
@@ -86,6 +87,8 @@ public class SkateControllerFSM : MonoBehaviour
             case SkaterState.Airborne:
                 if (groundCheck.isGrounded)
                 {
+                    justLanded = true;
+                    handleLanding();
                     scoreManager.BankPoints();
                     currentState = SkaterState.Grounded;
                     airScoreTimer = 0f;
@@ -135,6 +138,11 @@ public class SkateControllerFSM : MonoBehaviour
             }
         }
 
+        if (justLanded)
+        {
+            handleLanding();
+        }
+
         else if (currentState == SkaterState.Airborne)
         {
             airScoreTimer += Time.deltaTime;
@@ -144,11 +152,18 @@ public class SkateControllerFSM : MonoBehaviour
                 airScoreTimer = 0f;
             }
         }
+
     }
 
     public void SetState(SkaterState newState)
     {
         currentState = newState;
+    }
+
+    public void handleLanding()
+    {
+        rb.angularVelocity = 0f;
+        justLanded = false;
     }
 
     void HandleGrounded()
@@ -384,5 +399,7 @@ public class SkateControllerFSM : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
         }
     }
+
+    
     
 }
