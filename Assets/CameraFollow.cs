@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     void LateUpdate()
@@ -37,6 +37,9 @@ public class CameraFollow : MonoBehaviour
          desiredPostion, smoothSpeed * Time.deltaTime);
         
         //cam.orthographicSize = Mathf.Lerp(2f, 10f, Mathf.InverseLerp(0f, 10f, target.position.y));
+        float targetSize = 2f + targetRB.velocity.magnitude * 0.5f;
+        targetSize = Mathf.Clamp(targetSize, 5f, 10f);
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, 5f * Time.deltaTime);
         transform.position = smoothedPosition;
     }
 }
