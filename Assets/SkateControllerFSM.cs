@@ -236,12 +236,13 @@ public class SkateControllerFSM : MonoBehaviour
             {
                 //Debug.Log("TRY PUSH!");
                 TryPushCooldown();
-                //StartCoroutine(SpriteSwitchPush());
+                if (canPush) StartCoroutine(SpriteSwitchPush());
             }
             else
             {
                 //Debug.Log("TRY JUMP!");
                 canJump = true;
+
                 //StartCoroutine(SpriteSwitchJump());
             }
 
@@ -322,23 +323,26 @@ public class SkateControllerFSM : MonoBehaviour
     void PlayAnim(string name)
     {
     if (currentAnim == name) return;
-
     currentAnim = name;
     anim.Play(name);
     }
+
+    
     private IEnumerator SpriteSwitchPush()
     {
-
+        PlayAnim("Push_kick");
         //spriteRenderer.sprite = pushSprite;
-        yield return new WaitForSeconds(0.1f);  //can adjust 
+        yield return new WaitForSeconds(0.4f);  //can adjust 
         if (groundCheck.isGrounded)
         {
             //spriteRenderer.sprite = rideSprite;
+            PlayAnim("Riding");
         }
     }
-
+    /*
     private IEnumerator SpriteSwitchJump()
     {
+        PlayAnim("Air_hold");
         //spriteRenderer.sprite = jumpSprite;
 
         yield return new WaitUntil(() => rb.velocity.y <= 0f);
@@ -346,11 +350,13 @@ public class SkateControllerFSM : MonoBehaviour
 
         yield return new WaitUntil(() => groundCheck.isGrounded);
         //spriteRenderer.sprite = crouchSprite;
+        PlayAnim("Crouch");
 
         yield return new WaitForSeconds(0.1f); //can adjust
         //spriteRenderer.sprite = rideSprite;
+        PlayAnim("Riding_fast");
     }
-
+    */
     IEnumerator ResetSpin()
     {
         yield return new WaitForSeconds(0.4f);
