@@ -23,13 +23,18 @@ public class SkateControllerFSM : MonoBehaviour
     public GroundTrigger groundCheck;
 
     private Rigidbody2D rb;
+
+    Animator anim;
+    string currentAnim;
     public SpriteRenderer spriteRenderer;
+    /*
     public Sprite rideSprite;
     public Sprite pushSprite;
     public Sprite crouchSprite;
     public Sprite jumpSprite;
     public Sprite crouchRight;
     public Sprite crouchLeft;
+    */
 
     public float jumpTimeThreshold = 0.2f;
     private float jumpTime;
@@ -58,6 +63,7 @@ public class SkateControllerFSM : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.centerOfMass = Vector2.zero;     // reset com to middle of skater
+        anim = GetComponentInChildren<Animator>();
 
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
@@ -230,13 +236,13 @@ public class SkateControllerFSM : MonoBehaviour
             {
                 //Debug.Log("TRY PUSH!");
                 TryPushCooldown();
-                StartCoroutine(SpriteSwitchPush());
+                //StartCoroutine(SpriteSwitchPush());
             }
             else
             {
                 //Debug.Log("TRY JUMP!");
                 canJump = true;
-                StartCoroutine(SpriteSwitchJump());
+                //StartCoroutine(SpriteSwitchJump());
             }
 
             jumpTime = 0f;
@@ -252,20 +258,23 @@ public class SkateControllerFSM : MonoBehaviour
         {
             spinLeft = true;
             spinRight = false;
-            spriteRenderer.sprite = crouchLeft;
+            PlayAnim("Crouch_left");
+            //spriteRenderer.sprite = crouchLeft;
             StartCoroutine(ResetSpin());
         }
         else if (mouseDirection > 0.05f && !spinRight)
         {
             spinRight = true;
             spinLeft = false;
-            spriteRenderer.sprite = crouchRight;
+            PlayAnim("Crouch_right");
+            //spriteRenderer.sprite = crouchRight;
             StartCoroutine(ResetSpin());
         }
 
         else if (!spinLeft && !spinRight)
         {
-            spriteRenderer.sprite = crouchSprite;
+            PlayAnim("Crouch");
+            //spriteRenderer.sprite = crouchSprite;
         }
 
     }
@@ -310,28 +319,36 @@ public class SkateControllerFSM : MonoBehaviour
         rb.AddForce(Vector2.right * effectiveForce, ForceMode2D.Impulse);
     }
 
+    void PlayAnim(string name)
+    {
+    if (currentAnim == name) return;
+
+    currentAnim = name;
+    anim.Play(name);
+    }
     private IEnumerator SpriteSwitchPush()
     {
-        spriteRenderer.sprite = pushSprite;
+
+        //spriteRenderer.sprite = pushSprite;
         yield return new WaitForSeconds(0.1f);  //can adjust 
         if (groundCheck.isGrounded)
         {
-            spriteRenderer.sprite = rideSprite;
+            //spriteRenderer.sprite = rideSprite;
         }
     }
 
     private IEnumerator SpriteSwitchJump()
     {
-        spriteRenderer.sprite = jumpSprite;
+        //spriteRenderer.sprite = jumpSprite;
 
         yield return new WaitUntil(() => rb.velocity.y <= 0f);
-        spriteRenderer.sprite = rideSprite;
+        //spriteRenderer.sprite = rideSprite;
 
         yield return new WaitUntil(() => groundCheck.isGrounded);
-        spriteRenderer.sprite = crouchSprite;
+        //spriteRenderer.sprite = crouchSprite;
 
         yield return new WaitForSeconds(0.1f); //can adjust
-        spriteRenderer.sprite = rideSprite;
+        //spriteRenderer.sprite = rideSprite;
     }
 
     IEnumerator ResetSpin()

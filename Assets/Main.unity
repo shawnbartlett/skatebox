@@ -317,7 +317,7 @@ MonoBehaviour:
   crashFriction: {fileID: 6200000, guid: d35ea119f00ef4a83ab2aa31c746c1f4, type: 2}
   groundCheck: {fileID: 969725164}
   spriteRenderer: {fileID: 1832935866}
-  rideSprite: {fileID: 21300000, guid: d3ed0d9a4124f4d929f3a2e5f4636dcb, type: 3}
+  rideSprite: {fileID: 1675156222, guid: 7f007203c1e4e47a192c57b7859d5e1d, type: 3}
   pushSprite: {fileID: -1861633062, guid: 7b07c2b9a7e074fe8ab8d1ade27bcdc6, type: 3}
   crouchSprite: {fileID: 21300000, guid: 8ec35915787484b5591368bd4d0ab4f9, type: 3}
   jumpSprite: {fileID: 21300000, guid: e3fc161762a1d429f9eb5604959ed8dc, type: 3}
@@ -400,10 +400,10 @@ BoxCollider2D:
   m_Offset: {x: 0.000000029802322, y: 0.0653398}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
@@ -14379,6 +14379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1832935865}
   - component: {fileID: 1832935866}
+  - component: {fileID: 1832935867}
   m_Layer: 11
   m_Name: SkaterVisual
   m_TagString: Untagged
@@ -14453,6 +14454,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1832935867
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832935864}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 67e3e60337fbe4846898f44f3ee3b7b1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1872204597
 PrefabInstance:
   m_ObjectHideFlags: 0
