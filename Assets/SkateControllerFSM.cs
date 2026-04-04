@@ -120,7 +120,7 @@ public class SkateControllerFSM : MonoBehaviour
             speedTimer += Time.deltaTime;
             if (speedTimer >= 0.2f)
             {
-                scoreManager.AddPoints(1, Color.green); //add points 
+                //scoreManager.AddPoints(1, Color.green); //add points 
                 speedTimer = 0f;
             }
         }
@@ -132,7 +132,7 @@ public class SkateControllerFSM : MonoBehaviour
             {
                 //physics stuff here
                 ApplyPushForce();
-                scoreManager.AddPoints(2, Color.yellow); //2 points for push
+                //scoreManager.AddPoints(2, Color.yellow); //2 points for push
                 canPush = false;
             }
 
