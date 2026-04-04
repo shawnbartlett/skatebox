@@ -317,12 +317,6 @@ MonoBehaviour:
   crashFriction: {fileID: 6200000, guid: d35ea119f00ef4a83ab2aa31c746c1f4, type: 2}
   groundCheck: {fileID: 969725164}
   spriteRenderer: {fileID: 1832935866}
-  rideSprite: {fileID: 1675156222, guid: 7f007203c1e4e47a192c57b7859d5e1d, type: 3}
-  pushSprite: {fileID: -1861633062, guid: 7b07c2b9a7e074fe8ab8d1ade27bcdc6, type: 3}
-  crouchSprite: {fileID: 21300000, guid: 8ec35915787484b5591368bd4d0ab4f9, type: 3}
-  jumpSprite: {fileID: 21300000, guid: e3fc161762a1d429f9eb5604959ed8dc, type: 3}
-  crouchRight: {fileID: 21300000, guid: 05805b07aa27e4ab29b8ddb45b4ea951, type: 3}
-  crouchLeft: {fileID: 1992664465, guid: 61d1fad795b914e3c8a77adccd630890, type: 3}
   jumpTimeThreshold: 0.2
   jumpForce: 3
   pushForce: 1.4
@@ -689,7 +683,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: -10}
+  m_LocalPosition: {x: 4.5, y: 5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
